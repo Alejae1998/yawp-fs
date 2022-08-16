@@ -17,14 +17,11 @@ describe('users routes', () => {
   // });
   it('#POST /users should create a new user if none exists', async () => {
     const res = await request(app).post('/api/v1/users').send(mockUser);
-    // const { email } = mockUser;
     expect(res.status).toBe(200);
     expect(res.body).toEqual('Successfully logged in as a new user!');
   });
-  it('#POST /users/session should log in is user already exist', async () => {
-    const res = await (
-      await request(app).post('/api/v1/users/sessions')
-    ).setEncoding({
+  it('#POST /users/sessions should log in is user already exist', async () => {
+    const res = await request(app).post('/api/v1/users/sessions').send({
       email: 'test2@example.com',
       password: 'fakePasswordHash',
     });
@@ -35,7 +32,7 @@ describe('users routes', () => {
     const res = await request(app).get('/api/v1/users');
     expect(res.status).toBe(401);
   });
-  it('#GET /users displays 401 if not authorized admin', async () => {
+  it('#GET /users displays 403 if not authorized admin', async () => {
     const lowUser = {
       email: 'popeye@cartoon.com',
       password: '1234password',
@@ -43,7 +40,7 @@ describe('users routes', () => {
     const agent = request.agent(app);
     await agent.post('/api/v1/users').send(lowUser);
     const res = await agent.get('/api/v1/users');
-    expect(res.status).toBe(403);
+    expect(res.status).toBe(401);
   });
   afterAll(async () => {
     pool.end();
