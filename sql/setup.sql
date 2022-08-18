@@ -38,18 +38,18 @@ INSERT INTO yawp_users (email, password_hash) VALUES
 ('test2@example.com', '$2b$10$ppw7JtE6dIWepG7/a32TsO2icC6/SJX7O3jjzSlFK8zhL4LuYe5AG');
 
 INSERT INTO yawp_restaurants (name, type) VALUES 
-('Cubo', 'Cuban'),
-('K-Town', 'Korean'),
-('Santorini', 'Greek'),
-('QBacano', 'Colombian'),
-('Valencia', 'Spanish');
+('Cubo', 'Cuban');
+-- ('K-Town', 'Korean'),
+-- ('Santorini', 'Greek'),
+-- ('QBacano', 'Colombian'),
+-- ('Valencia', 'Spanish');
 
 INSERT INTO yawp_reviews (restaurant_id, user_id, stars, detail) VALUES 
-(1, 1, 5, 'Best ropa vieja in town'),
-(2, 2, 5, 'A little bit to spendy but best korean bbq in pdx'),
-(3, 3, 1, 'Tzatziki was really bad'),
-(4, 4, 3, 'service is really bad here'),
-(5, 5, 5, 'Omg paella here is amazing!');
+(1, 1, 5, 'Best ropa vieja in town');
+-- (2, 2, 5, 'A little bit to spendy but best korean bbq in pdx'),
+-- (3, 3, 1, 'Tzatziki was really bad'),
+-- (4, 4, 3, 'service is really bad here'),
+-- (5, 5, 5, 'Omg paella here is amazing!');
 
 
 
