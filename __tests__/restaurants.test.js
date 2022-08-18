@@ -15,6 +15,15 @@ describe('backend-express-template routes', () => {
     const res = await request(app).get('/api/v1/restaurants');
 
     expect(res.status).toBe(200);
-    expect(res.body.length).toBe(5);
+    expect(res.body[0]).toEqual({
+      id: expect.any(String),
+      name: expect.any(String),
+      type: expect.any(String),
+    });
+  });
+
+  it('#GET /api/v1/restaurants?type= returns status 200', async () => {
+    const res = await request(app).get('/api/v1/restaurants?type=cuban');
+    expect(res.status).toBe(200);
   });
 });
