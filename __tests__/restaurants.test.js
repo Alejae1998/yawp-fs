@@ -23,7 +23,29 @@ describe('backend-express-template routes', () => {
   });
 
   it('#GET /api/v1/restaurants?type= returns status 200', async () => {
-    const res = await request(app).get('/api/v1/restaurants?type=cuban');
+    const res = await request(app).get('/api/v1/restaurants?type=Cuban');
     expect(res.status).toBe(200);
+  });
+
+  it('#GET /api/v1/restaurants?type= returns specific types of restaurants as a list', async () => {
+    const res = await request(app).get('/api/v1/restaurants?type=Cuban');
+
+    expect(res.body).toEqual([
+      {
+        id: expect.any(String),
+        name: 'Cubo',
+        type: 'Cuban',
+      },
+    ]);
+  });
+  it('#GET restaurants/:restId, one restaurant with nested reviews', async () => {
+    const res = await request(app).get('/api/restaurants/1');
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      name: 'Cubo',
+      type: 'Cuban',
+      reviews: expect.any(Array),
+    });
   });
 });
