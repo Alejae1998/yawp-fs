@@ -48,4 +48,40 @@ describe('restaurant routes', () => {
       reviews: expect.any(Array),
     });
   });
+
+  describe('backend-express-template routes', () => {
+    let agent = null;
+    beforeEach(async () => {
+      const user = {
+        email: 'test23@example.com',
+        password: '123456',
+      };
+      agent = request.agent(app);
+      const res = await agent.post('/api/v1/users').send(user);
+      expect(res.status).toBe(200);
+    });
+    it('#POST route should return a status 200', async () => {
+      const newRev = {
+        starts: '5',
+        detail: 'Love this place',
+      };
+      const res = await (
+        await request(app).post('/api/v1/restaurants/1/reviews')
+      ).send(newRev);
+      expect(res.status).toBe(401);
+    });
+    it('#POST restaurants/:rest:Id/reviews should create a new review', async () => {
+      const newRev = {
+        starts: '5',
+        detail: 'Love this place',
+      };
+      const res = await agent
+        .post('/api/v1/restaurants/1/reviews')
+        .send(newRev);
+      expect(res.body).toEqual({
+        starts: '5',
+        detail: 'Love this place',
+      });
+    });
+  });
 });
